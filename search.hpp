@@ -34,7 +34,7 @@ namespace Search {
   class GeneralSearch {
   private:
     deque<SearchNode&> Q;
-    void enqueue(SearchNode);
+    void enqueue(SearchNode&);
   public:
     vector<SearchNode&> search(Problem&);
   };
