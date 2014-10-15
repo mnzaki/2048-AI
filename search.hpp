@@ -6,7 +6,7 @@ namespace Search {
 
   class Operator {
   public:
-    virtual State apply(State&) =0;
+    virtual State& apply(State&) =0;
   };
 
   class SearchNode {
@@ -37,6 +37,6 @@ namespace Search {
     std::deque<SearchNode&> Q;
     virtual void enqueue(SearchNode&) =0;
   public:
-    vector<SearchNode&> search(Problem&);
+    SearchNode& search(Problem&);
   };
 };
