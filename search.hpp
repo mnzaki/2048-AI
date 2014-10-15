@@ -2,39 +2,40 @@
 #include <deque>
 
 namespace Search {
-  class State {
-  };
+  class State { };
 
   class Operator {
   public:
-    State apply(State&);
+    virtual State apply(State&) =0;
   };
 
   class SearchNode {
   public:
     State &state;
     SearchNode &parent;
-    Operator &operator;
+    Operator &op;
     unsigned long depth;
     long pathCost;
 
-    SearchNode();
-    SearchNode(State&, SearchNode&, Operator&, unsigned long, long);
+    SearchNode(State& _state, SearchNode& _parent, Operator& _op,
+              unsigned long _depth, long _pathCost) :
+      state(_state), parent(_parent), op(_op),
+      depth(_depth), pathCost(pathCost_) { };
   };
 
   class Problem {
   public:
     std::vector<Operator&> operators;
-    State initialState;
+    State &initialState;
     // state space???
-    bool isGoal(State&);
-    long pathCost(Node&);
+    virtual bool isGoal(State&) =0;
+    virtual long pathCost(Node&) =0;
   };
 
   class GeneralSearch {
   private:
-    deque<SearchNode&> Q;
-    void enqueue(SearchNode);
+    std::deque<SearchNode&> Q;
+    virtual void enqueue(SearchNode&) =0;
   public:
     vector<SearchNode&> search(Problem&);
   };
