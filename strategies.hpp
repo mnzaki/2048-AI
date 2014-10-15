@@ -1,3 +1,6 @@
+#ifndef __STRATEGIES_HPP__
+#define __STRATEGIES_HPP__
+
 #include "search.hpp"
 
 namespace Search {
@@ -9,3 +12,5 @@ namespace Search {
   class AS1 : GeneralSeach { };
   class AS2 : GeneralSeach { };
 };
+
+#endif /* end of include guard: __STRATEGIES_HPP__ */
