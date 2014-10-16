@@ -16,8 +16,17 @@ namespace Search {
 			Q.push_front(node);
 		}
   };
-  class GR1 : GeneralSeach { };
-  class GR2 : GeneralSeach { };
-  class AS1 : GeneralSeach { };
-  class AS2 : GeneralSeach { };
+  class BFS : GeneralSeach { 
+  	virtual int f(State&) =0;
+  	
+		void enqueue(SearchNode &node){
+			int fnode = f(node);
+			for(deque<SearchNode&>::iterator it = Q.begin(); it != Q.end(); it++){
+				if(f(it->state) > fnode){
+					Q.insert(it, node);
+					break;
+				}
+			}
+		}
+  };
 };
