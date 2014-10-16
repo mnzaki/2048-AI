@@ -39,7 +39,8 @@ Problem2048::Problem2048(Problem2048::State *state, unsigned _k) : k(_k) {
   }
 
   score_lut = new unsigned[k+1];
-  for (int i = 0; i < k; i++) {
+  score_lut[0] = 0;
+  for (int i = 1; i <= k; i++) {
     score_lut[i] = pow(2, i) * (i-1);
   }
 
