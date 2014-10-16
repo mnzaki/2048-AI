@@ -28,15 +28,18 @@ void SearchP(Problem2048::State *grid, int M, Search::GeneralSearch *strategy, b
     x++;
   }
 
-
-  if(visualize) node->state->visualize();
+  if (visualize) {
+    std::cout << ((Problem2048::State*)node->state)->visualize();
+  }
   while(!stk.empty()){
     node = stk.top(); stk.pop();
-    cout << "Move " << node->op->print();
-    if(visualize) node->state->visualize();
+    cout << "Move " << node->op->print() << std::endl;
+    if (visualize) {
+      std::cout << ((Problem2048::State*)node->state)->visualize();
+    }
   }
 
-  cout << "Total Path Cost = " << totalCost;
+  cout << "Total Path Cost = " << totalCost << std::endl;
 }
 
 int main(){
