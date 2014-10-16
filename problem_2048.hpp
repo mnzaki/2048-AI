@@ -12,6 +12,7 @@ public:
   public:
     unsigned board[4][4];
     State();
+    State(bool empty);
   };
 
   class Operator : public Search::Operator {
@@ -24,6 +25,7 @@ public:
   };
 
   Problem2048(unsigned k);
+  Problem2048(State* init, unsigned k);
   bool isGoal(Search::State *s);
   long pathCost(Search::SearchNode*);
 

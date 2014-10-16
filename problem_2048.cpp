@@ -3,6 +3,10 @@
 #include <cstring>
 #include <cmath>
 
+Problem2048::State::State() {
+  State(true);
+}
+
 // State stores n, not 2^n
 Problem2048::State::State(bool empty) {
   memset(board, 0, sizeof(board));
@@ -13,6 +17,10 @@ Problem2048::State::State(bool empty) {
     pos = std::rand() % 16;
     board[pos/4][pos%4] = 1;
   }
+}
+
+Problem2048::Problem2048(unsigned k) {
+  Problem2048(NULL, k);
 }
 
 Problem2048::Problem2048(Problem2048::State *state, unsigned k) {
