@@ -1,7 +1,7 @@
 #include "strategies.hpp"
 
 namespace Search {
-  class BF : GeneraSearch { 
+  class BF : GeneraSearch {
 		void enqueue(SearchNode &node){
 			Q.push_back(node);
 		}
@@ -16,9 +16,9 @@ namespace Search {
 			Q.push_front(node);
 		}
   };
-  class BFS : GeneralSeach { 
+  class BFS : GeneralSeach {
   	virtual int f(State&) =0;
-  	
+
 		void enqueue(SearchNode &node){
 			int fnode = f(node);
 			for(deque<SearchNode&>::iterator it = Q.begin(); it != Q.end(); it++){

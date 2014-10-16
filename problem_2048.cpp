@@ -3,18 +3,21 @@
 #include <cmath>
 
 // State stores n, not 2^n
-Problem2048::State::State() {
+Problem2048::State::State(bool empty) {
   memset(board, 0, sizeof(board));
+  if(!empty){
+    unsigned pos;
+    pos = std::rand() % 16;
+    board[pos/4][pos%4] = 1;
+    pos = std::rand() % 16;
+    board[pos/4][pos%4] = 1;
+  }
 }
 
-Problem2048::Problem2048(unsigned k) {
+Problem2048::Problem2048(Problem2048::State state, unsigned k) {
   M = pow(2, k);
-  initialState = new Problem2048::State();
-  unsigned pos;
-  pos = std::rand() % 16;
-  initialState.board[pos/4][pos%4] = 1;
-  pos = std::rand() % 16;
-  initialState.board[pos/4][pos%4] = 1;
+  initialState = state;
+  if(initialState == NULL) new Problem2048::State(false);
 
   score_lut = new unsigned[k+1];
   score_lut[0] = 0;
