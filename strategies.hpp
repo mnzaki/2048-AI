@@ -4,13 +4,23 @@
 #include "search.hpp"
 
 namespace Search {
-  class BF : GeneraSearch { };
-  class DF : GeneralSeach { };
-  class ID : GeneralSeach { };
-  class GR1 : GeneralSeach { };
-  class GR2 : GeneralSeach { };
-  class AS1 : GeneralSeach { };
-  class AS2 : GeneralSeach { };
+  class BF : private GeneralSearch {
+  private:
+    void enqueue(SearchNode*);
+  };
+  class DF : private GeneralSearch {
+  private:
+    void enqueue(SearchNode*);
+  };
+  class ID : private GeneralSearch {
+  private:
+    void enqueue(SearchNode*);
+  };
+  class BFS : private GeneralSearch {
+  private:
+    virtual int f(State*) =0;
+    void enqueue(SearchNode*);
+  };
 };
 
 #endif /* end of include guard: __STRATEGIES_HPP__ */
