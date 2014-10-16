@@ -1,3 +1,4 @@
+#include <cstring>
 #include <deque>
 #include "strategies.hpp"
 
@@ -9,7 +10,13 @@ namespace Search {
     Q.push_front(node);
   }
   void ID::enqueue(SearchNode *node){
-    Q.push_front(node);
+    if (node->depth <= limit) {
+      Q.push_front(node);
+    } else if (Q.empty() && limit < maxLimit) {
+      limit++;
+      while (node->parent != NULL) node = node->parent;
+      Q.push_front(node);
+    }
   }
 
   void BFS::enqueue(SearchNode *node){
