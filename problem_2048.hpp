@@ -35,16 +35,16 @@ public:
   long pathCost(Search::SearchNode*);
 
   class GR1 : public Search::BFS {
-    int f(Search::State*);
+    int f(Search::SearchNode*);
   };
   class GR2 : public Search::BFS {
-    int f(Search::State*);
+    int f(Search::SearchNode*);
   };
   class AS1 : public Search::BFS {
-    int f(Search::State*);
+    int f(Search::SearchNode*);
   };
   class AS2 : public Search::BFS {
-    int f(Search::State*);
+    int f(Search::SearchNode*);
   };
 };
 

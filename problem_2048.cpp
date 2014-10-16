@@ -142,15 +142,35 @@ std::string Problem2048::Operator::print() {
   return "NONE";
 }
 
-int Problem2048::GR1::f(Search::State *s){
-  return 0;
+int Problem2048::GR1::f(Search::SearchNode *s){
+  Problem2048::State *ps = (Problem2048::State*)s->state;
+  int cost = 0;
+  for(int i=0; i<16; i++){
+    cost += pow(2,ps->board[i/4][i%4])*ps->board[i/4][i%4];
+  }
+  return cost;
 }
-int Problem2048::GR2::f(Search::State *s){
-  return 0;
+int Problem2048::GR2::f(Search::SearchNode *s){
+  Problem2048::State *ps = (Problem2048::State*)s->state;
+  int cost = 0;
+  for(int i=0; i<16; i++){
+    cost += pow(2,ps->board[i/4][i%4])*ps->board[i/4][i%4];
+  }
+  return cost;
 }
-int Problem2048::AS1::f(Search::State *s){
-  return 0;
+int Problem2048::AS1::f(Search::SearchNode *s){
+  Problem2048::State *ps = (Problem2048::State*)s->state;
+  int cost = s->pathCost; // TODO
+  for(int i=0; i<16; i++){
+    cost += pow(2,ps->board[i/4][i%4])*ps->board[i/4][i%4];
+  }
+  return cost;
 }
-int Problem2048::AS2::f(Search::State *s){
-  return 0;
+int Problem2048::AS2::f(Search::SearchNode *s){
+  Problem2048::State *ps = (Problem2048::State*)s->state;
+  int cost = s->pathCost;
+  for(int i=0; i<16; i++){
+    cost += pow(2,ps->board[i/4][i%4])*ps->board[i/4][i%4];
+  }
+  return cost;
 }

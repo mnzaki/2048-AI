@@ -2,6 +2,7 @@
 #define __STRATEGIES_HPP__
 
 #include "search.hpp"
+#include <deque>
 
 namespace Search {
   class BF : public GeneralSearch {
@@ -23,7 +24,8 @@ namespace Search {
   };
   class BFS : public GeneralSearch {
   public:
-    virtual int f(State*) =0;
+    std::deque<int> fvalues;
+    virtual int f(SearchNode*) =0;
   private:
     void enqueue(SearchNode*);
   };
