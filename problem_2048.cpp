@@ -25,7 +25,7 @@ std::string Problem2048::State::visualize(void) {
   for (int y = 0; y < 4; y++) {
     ss << "| ";
     for (int x = 0; x < 4; x++) {
-      ss << board[x][y] << " | ";
+      ss << board[y][x] << " | ";
     }
     ss << std::endl;
   }
@@ -75,7 +75,7 @@ Search::State* Problem2048::Operator::apply(Search::State *s) {
   Problem2048::State *state = (Problem2048::State*) s;
   Problem2048::State *newState = new Problem2048::State();
 
-  unsigned x, y, x2, y2, vx, vy;
+  int x, y, x2, y2, vx, vy;
 
   switch (move) {
   case UP:
@@ -84,7 +84,7 @@ Search::State* Problem2048::Operator::apply(Search::State *s) {
     break;
   case DOWN:
     x = 3; y = 3;
-    vx = 0; y = -1;
+    vx = 0; vy = -1;
     break;
   case LEFT:
     x = 0; y = 0;
@@ -96,27 +96,34 @@ Search::State* Problem2048::Operator::apply(Search::State *s) {
     break;
   };
 
+#if DEBUG
+  std::cout << "APPLY" << std::endl;
+  std::cout << x << " " << y << " " << vx << " " << vy << std::endl;
+#endif
+
   while (x >= 0 && x < 4 && y >= 0 && y < 4) {
     x2 = x; y2 = y;
-    newState->board[x][y] = state->board[x2][y2];
+    newState->board[y][x] = state->board[y2][x2];
     x2 += vx; y2 += vy;
-    while (x2 >= 0 && x2 < 4 && y2 >= 0 && y2 < 4 && !state->board[x2][y2]) {
-      if (state->board[x2][y2]) {
-        if (state->board[x2][y2] == newState->board[x][y]) {
+    while (x2 >= 0 && x2 < 4 && y2 >= 0 && y2 < 4) {
+      if (state->board[y2][x2]) {
+        if (state->board[y2][x2] == newState->board[y][x]) {
           // it's the same tile, merge it
-          newState->board[x][y] += 1;
+          newState->board[y][x] += 1;
           x += vx; y += vy;
         } else {
           // just move it
-          if (newState->board[x][y]) x += vx; y += vy;
-          newState->board[x][y] = state->board[x2][y2];
+          if (newState->board[y][x]) { x += vx; y += vy; }
+          newState->board[y][x] = state->board[y2][x2];
         }
       }
       x2 += vx; y2 += vy;
     }
-    x += vy; y = vx;
+    x += vy; y += vx;
   }
-
+#if DEBUG
+  std::cout << "FROM: \n" << state->visualize() << "TO: \n" << newState->visualize() << "\n\n";
+#endif
   return newState;
 }
 
