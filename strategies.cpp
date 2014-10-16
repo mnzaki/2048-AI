@@ -22,10 +22,11 @@ namespace Search {
   void BFS::enqueue(SearchNode *node){
     int fnode = f(node->state);
     for(std::deque<SearchNode*>::iterator it = Q.begin(); it != Q.end(); it++){
-      if(f((*it)->state) > fnode){
+      if(f((*it)->state) < fnode){
         Q.insert(it, node);
         break;
       }
     }
   }
+
 };

@@ -133,3 +133,16 @@ std::string Problem2048::Operator::print() {
   }
   return "NONE";
 }
+
+int Problem2048::GR1::f(Search::State *s){
+  return 0;
+}
+int Problem2048::GR2::f(Search::State *s){
+  return 0;
+}
+int Problem2048::AS1::f(Search::State *s){
+  return 0;
+}
+int Problem2048::AS2::f(Search::State *s){
+  return 0;
+}

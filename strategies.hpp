@@ -22,8 +22,9 @@ namespace Search {
     ID() : limit(5), maxLimit(20) { };
   };
   class BFS : public GeneralSearch {
-  private:
+  public:
     virtual int f(State*) =0;
+  private:
     void enqueue(SearchNode*);
   };
 };

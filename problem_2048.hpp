@@ -3,6 +3,7 @@
 
 #include <string>
 #include "search.hpp"
+#include "strategies.hpp"
 #include <string>
 
 class Problem2048 : public Search::Problem {
@@ -33,6 +34,18 @@ public:
   bool isGoal(Search::State *s);
   long pathCost(Search::SearchNode*);
 
+  class GR1 : public Search::BFS {
+    int f(Search::State*);
+  };
+  class GR2 : public Search::BFS {
+    int f(Search::State*);
+  };
+  class AS1 : public Search::BFS {
+    int f(Search::State*);
+  };
+  class AS2 : public Search::BFS {
+    int f(Search::State*);
+  };
 };
 
 #endif /* end of include guard: __PROBLEM_2048_HPP__ */
