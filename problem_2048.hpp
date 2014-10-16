@@ -3,6 +3,7 @@
 
 #include <string>
 #include "search.hpp"
+#include <string>
 
 class Problem2048 : public Search::Problem {
 public:
@@ -24,6 +25,7 @@ public:
     } move;
     Operator(MoveType _move) : move(_move) { };
     Search::State* apply(Search::State*);
+    std::string print();
   };
 
   Problem2048(State* init, unsigned k);

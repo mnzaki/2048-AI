@@ -2,6 +2,7 @@
 #define __SEARCH_HPP__
 
 #include <vector>
+#include <string>
 #include <deque>
 #include <string>
 
@@ -14,6 +15,7 @@ namespace Search {
   class Operator {
   public:
     virtual State* apply(State*) =0;
+    virtual std::string print() =0;
   };
 
   class SearchNode {

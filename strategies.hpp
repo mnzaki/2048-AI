@@ -4,15 +4,15 @@
 #include "search.hpp"
 
 namespace Search {
-  class BF : private GeneralSearch {
+  class BF : public GeneralSearch {
   private:
     void enqueue(SearchNode*);
   };
-  class DF : private GeneralSearch {
+  class DF : public GeneralSearch {
   private:
     void enqueue(SearchNode*);
   };
-  class ID : private GeneralSearch {
+  class ID : public GeneralSearch {
   private:
     unsigned limit, maxLimit;
     void enqueue(SearchNode*);
@@ -21,7 +21,7 @@ namespace Search {
       : limit(_limit), maxLimit(_maxLimit) { };
     ID() : limit(5), maxLimit(20) { };
   };
-  class BFS : private GeneralSearch {
+  class BFS : public GeneralSearch {
   private:
     virtual int f(State*) =0;
     void enqueue(SearchNode*);

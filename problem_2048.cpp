@@ -4,6 +4,7 @@
 #include <cmath>
 #include <sstream>
 #include <iomanip>
+#include <string>
 
 // State stores n, not 2^n
 Problem2048::State::State(bool empty) {
@@ -109,4 +110,17 @@ Search::State* Problem2048::Operator::apply(Search::State *s) {
   }
 
   return newState;
+}
+
+std::string Problem2048::Operator::print() {
+  switch(move){
+    case UP:
+      return "Up";
+    case DOWN:
+      return "Down";
+    case LEFT:
+      return "Left";
+    case RIGHT:
+      return "Right";
+  }
 }
