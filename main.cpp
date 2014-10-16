@@ -59,7 +59,7 @@ int main(){
   // else if(sstrategy.substr(0,3) == "AS1") strategy = new Search::AS1();
   // else if(sstrategy.substr(0,3) == "AS2") strategy = new Search::AS2();
 
-  SearchP(GenGrid(), pow(2,m), strategy, visualize==1);
+  SearchP(NULL, pow(2,m), strategy, visualize==1);
 
   return 0;
 }
