@@ -46,14 +46,15 @@ Problem2048::Problem2048(Problem2048::State *state, unsigned k) {
     k--;
   }
 
-  Problem2048::Operator op1(Problem2048::Operator::UP);
-  Problem2048::Operator op2(Problem2048::Operator::DOWN);
-  Problem2048::Operator op4(Problem2048::Operator::LEFT);
-  Problem2048::Operator op3(Problem2048::Operator::RIGHT);
-  operators.push_back(&op1);
-  operators.push_back(&op2);
-  operators.push_back(&op3);
-  operators.push_back(&op4);
+  Problem2048::Operator *op;
+  op = new Problem2048::Operator(Problem2048::Operator::UP);
+  operators.push_back(op);
+  op = new Problem2048::Operator(Problem2048::Operator::DOWN);
+  operators.push_back(op);
+  op = new Problem2048::Operator(Problem2048::Operator::LEFT);
+  operators.push_back(op);
+  op = new Problem2048::Operator(Problem2048::Operator::RIGHT);
+  operators.push_back(op);
 }
 
 bool Problem2048::isGoal(Search::State *s) {
@@ -74,9 +75,6 @@ long Problem2048::pathCost(Search::SearchNode *node) {
 }
 
 Search::State* Problem2048::Operator::apply(Search::State *s) {
-  std::cout << "a7a" << std::endl;
-return s;
-
   Problem2048::State *state = (Problem2048::State*) s;
   Problem2048::State *newState = new Problem2048::State();
 
