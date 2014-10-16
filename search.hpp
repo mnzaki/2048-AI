@@ -1,3 +1,6 @@
+#ifndef __SEARCH_HPP__
+#define __SEARCH_HPP__
+
 #include <vector>
 #include <deque>
 
@@ -40,3 +43,5 @@ namespace Search {
     SearchNode& search(Problem&);
   };
 };
+
+#endif /* end of include guard: __SEARCH_HPP__ */
