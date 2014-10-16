@@ -6,4 +6,4 @@ INC=search.hpp strategies.hpp problem_2048.hpp
 test: problem_2048_test
 
 problem_2048_test: $(FILES) $(INC) problem_2048_test.cpp
-	g++ $(CFLAGS) $(LDFLAGS) $(FILES) problem_2048_test.cpp -o problem_2048_test
+	g++ -std=c++11 $(CFLAGS) $(LDFLAGS) $(FILES) problem_2048_test.cpp -o problem_2048_test
