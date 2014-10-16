@@ -121,10 +121,29 @@ Search::State* Problem2048::Operator::apply(Search::State *s) {
       x2 += vx; y2 += vy;
     }
     x += vy; y += vx;
+    switch (move) {
+    case UP: y = 0; break;
+    case DOWN: y = 3; break;
+    case LEFT: x = 0; break;
+    case RIGHT: x = 3; break;
+    };
   }
+
+  // place a new 2**1
+  if (newState->board[0][0] == 0) {
+    newState->board[0][0] = 1;
+  } else if (newState->board[0][3] == 0) {
+    newState->board[0][3] = 1;
+  } else if (newState->board[3][3] == 0) {
+      newState->board[3][3] = 1;
+  } else if (newState->board[3][0] == 0) {
+      newState->board[3][0] = 1;
+  }
+
 #if DEBUG
   std::cout << "FROM: \n" << state->visualize() << "TO: \n" << newState->visualize() << "\n\n";
 #endif
+
   return newState;
 }
 

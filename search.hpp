@@ -30,6 +30,7 @@ namespace Search {
               unsigned long _depth, long _pathCost) :
       state(_state), parent(_parent), op(_op),
       depth(_depth), pathCost(_pathCost) { };
+    ~SearchNode() { delete state; }
   };
 
   class Problem {
