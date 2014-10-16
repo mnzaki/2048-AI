@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <cstring>
 #include <cmath>
+#include <sstream>
+#include <iomanip>
 
 // State stores n, not 2^n
 Problem2048::State::State(bool empty) {
@@ -15,9 +17,20 @@ Problem2048::State::State(bool empty) {
   }
 }
 
-Problem2048::Problem2048(Problem2048::State *state, unsigned k) {
-  unsigned pos;
+std::string Problem2048::State::visualize(void) {
+  std::stringstream ss;
+  //ss << std::setw(5) << std::setfill('0');
+  for (int y = 0; y < 4; y++) {
+    ss << "| ";
+    for (int x = 0; x < 4; x++) {
+      ss << board[x][y] << " | ";
+    }
+    ss << std::endl;
+  }
+  return ss.str();
+}
 
+Problem2048::Problem2048(Problem2048::State *state, unsigned k) {
   M = pow(2, k);
   initialState = state;
   if(initialState == NULL){

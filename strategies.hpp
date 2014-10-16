@@ -14,7 +14,12 @@ namespace Search {
   };
   class ID : private GeneralSearch {
   private:
+    unsigned limit, maxLimit;
     void enqueue(SearchNode*);
+  public:
+    ID(unsigned _limit, unsigned _maxLimit)
+      : limit(_limit), maxLimit(_maxLimit) { };
+    ID() : limit(5), maxLimit(20) { };
   };
   class BFS : private GeneralSearch {
   private:

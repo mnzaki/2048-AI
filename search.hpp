@@ -3,9 +3,13 @@
 
 #include <vector>
 #include <deque>
+#include <string>
 
 namespace Search {
-  class State { };
+  class State {
+  public:
+    virtual std::string visualize(void) =0;
+  };
 
   class Operator {
   public:
