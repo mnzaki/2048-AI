@@ -11,8 +11,9 @@ public:
   class State : public Search::State {
   public:
     unsigned board[4][4];
-    State();
     State(bool empty);
+    State() : State(true) { };
+    std::string visualize(void);
   };
 
   class Operator : public Search::Operator {
@@ -24,8 +25,8 @@ public:
     Search::State* apply(Search::State*);
   };
 
-  Problem2048(unsigned k);
   Problem2048(State* init, unsigned k);
+  Problem2048(unsigned k) : Problem2048(NULL, k) { };
   bool isGoal(Search::State *s);
   long pathCost(Search::SearchNode*);
 
