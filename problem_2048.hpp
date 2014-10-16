@@ -7,7 +7,7 @@
 
 class Problem2048 : public Search::Problem {
 public:
-  unsigned M;
+  unsigned k;
   unsigned *score_lut;
 
   class State : public Search::State {

@@ -32,8 +32,7 @@ std::string Problem2048::State::visualize(void) {
   return ss.str();
 }
 
-Problem2048::Problem2048(Problem2048::State *state, unsigned k) {
-  M = pow(2, k);
+Problem2048::Problem2048(Problem2048::State *state, unsigned _k) : k(_k) {
   initialState = state;
   if(initialState == NULL){
     initialState = new Problem2048::State(false);
@@ -60,7 +59,7 @@ Problem2048::Problem2048(Problem2048::State *state, unsigned k) {
 bool Problem2048::isGoal(Search::State *s) {
   Problem2048::State *state = (Problem2048::State*) s;
   for (int i = 0; i < 16; i++) {
-    if (state->board[i/4][i%4] == M) return true;
+    if (state->board[i/4][i%4] == k) return true;
   }
   return false;
 }
