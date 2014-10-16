@@ -63,12 +63,15 @@ Search::State* Problem2048::Operator::apply(Search::State *s) {
   case DOWN:
     x = 3; y = 3;
     vx = 0; y = -1;
+    break;
   case LEFT:
     x = 0; y = 0;
     vx = 1; vy = 0;
+    break;
   case RIGHT:
     x = 3; y = 3;
     vx = -1; vy = 0;
+    break;
   };
 
   while (x >= 0 && x < 4 && y >= 0 && y < 4) {
