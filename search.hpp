@@ -32,7 +32,7 @@ namespace Search {
     State &initialState;
     // state space???
     virtual bool isGoal(State&) =0;
-    virtual long pathCost(Node&) =0;
+    virtual long pathCost(SearchNode&) =0;
   };
 
   class GeneralSearch {
