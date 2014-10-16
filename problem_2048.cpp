@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iomanip>
 #include <string>
+#include <iostream>
 
 // State stores n, not 2^n
 Problem2048::State::State(bool empty) {
@@ -44,6 +45,15 @@ Problem2048::Problem2048(Problem2048::State *state, unsigned k) {
     score_lut[k] = pow(2, k) * (k-1);
     k--;
   }
+
+  Problem2048::Operator op1(Problem2048::Operator::UP);
+  Problem2048::Operator op2(Problem2048::Operator::DOWN);
+  Problem2048::Operator op4(Problem2048::Operator::LEFT);
+  Problem2048::Operator op3(Problem2048::Operator::RIGHT);
+  operators.push_back(&op1);
+  operators.push_back(&op2);
+  operators.push_back(&op3);
+  operators.push_back(&op4);
 }
 
 bool Problem2048::isGoal(Search::State *s) {
@@ -64,6 +74,9 @@ long Problem2048::pathCost(Search::SearchNode *node) {
 }
 
 Search::State* Problem2048::Operator::apply(Search::State *s) {
+  std::cout << "a7a" << std::endl;
+return s;
+
   Problem2048::State *state = (Problem2048::State*) s;
   Problem2048::State *newState = new Problem2048::State();
 
@@ -114,13 +127,14 @@ Search::State* Problem2048::Operator::apply(Search::State *s) {
 
 std::string Problem2048::Operator::print() {
   switch(move){
-    case UP:
+    case Problem2048::Operator::UP:
       return "Up";
-    case DOWN:
+    case Problem2048::Operator::DOWN:
       return "Down";
-    case LEFT:
+    case Problem2048::Operator::LEFT:
       return "Left";
-    case RIGHT:
+    case Problem2048::Operator::RIGHT:
       return "Right";
   }
+  return "NONE";
 }

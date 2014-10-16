@@ -1,5 +1,5 @@
 LDFLAGS=-lm
-CFLAGS=-O3
+CFLAGS=-ggdb
 FILES=search.cpp strategies.cpp problem_2048.cpp
 INC=search.hpp strategies.hpp problem_2048.hpp
 

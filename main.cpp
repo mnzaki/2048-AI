@@ -13,13 +13,21 @@ Problem2048::State* GenGrid(){
 
 void SearchP(Problem2048::State *grid, int M, Search::GeneralSearch *strategy, bool visualize){
   Problem2048 problem(grid, (int)round(log(M)/log(2.0)));
+
   SearchNode *node = strategy->search(&problem);
+
   int totalCost = node->pathCost;
   stack<Search::SearchNode*> stk;
+
+  int x=0;
   while(node->parent != NULL) {
     stk.push(node);
+
     node = node->parent;
+    if(x==10) break;
+    x++;
   }
+
 
   if(visualize) node->state->visualize();
   while(!stk.empty()){
@@ -36,11 +44,11 @@ int main(){
   Search::GeneralSearch *strategy;
   string sstrategy;
 
-  cout << "Enter m(the required power of 2 goal):";
+  cout << "Enter m(the required power of 2 goal): ";
   cin >> m;
-  cout << "Enter the strategy(BF, DF, ID , GRi, ASi)";
+  cout << "Enter the strategy(BF, DF, ID , GRi, ASi): ";
   cin >> sstrategy;
-  cout << "Enter 1 if you need to visualize the result, 0 insted:";
+  cout << "Enter 1 if you need to visualize the result, 0 insted: ";
   cin >> visualize;
 
   if(sstrategy.substr(0,2) == "BF") strategy = new Search::BF();
