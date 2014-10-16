@@ -140,6 +140,21 @@ Search::State* Problem2048::Operator::apply(Search::State *s) {
       newState->board[3][0] = 1;
   }
 
+  for(x = 0; x < 4; x++)  {
+    for(y = 0; y < 4; y++)  {
+      if (newState->board[y][x] != state->board[y][x]) break;
+    }
+    if (y != 4) break;
+  }
+
+  if (x == 4 && y == 4) {
+    delete newState;
+#if DEBUG
+    std::cout << "NO NEW STATE FROM:\n" << state->visualize();
+#endif
+    return NULL;
+  }
+
 #if DEBUG
   std::cout << "FROM: \n" << state->visualize() << "TO: \n" << newState->visualize() << "\n\n";
 #endif

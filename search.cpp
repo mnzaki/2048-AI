@@ -9,6 +9,8 @@ SearchNode* GeneralSearch::search(Problem* P) {
   enqueue(node);
 
   for (;;) {
+    bool hasChildren = false;
+
     if (Q.empty()) return NULL;
     node = Q.front();
     Q.pop_front();
@@ -21,7 +23,9 @@ SearchNode* GeneralSearch::search(Problem* P) {
                                        node->depth+1, 0);
         newNode->pathCost = P->pathCost(newNode);
         enqueue(newNode);
+        hasChildren = true;
       }
     }
+    if (!hasChildren) delete node;
   }
 }
