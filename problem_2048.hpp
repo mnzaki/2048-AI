@@ -1,6 +1,7 @@
 #ifndef __PROBLEM_2048_HPP__
 #define __PROBLEM_2048_HPP__
 
+#include <string>
 #include "search.hpp"
 
 class Problem2048 : public Search::Problem {
