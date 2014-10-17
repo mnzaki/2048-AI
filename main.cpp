@@ -21,7 +21,7 @@ void SearchP(Problem2048::State *grid, int M, Search::GeneralSearch *strategy, b
     stack<Search::SearchNode*> stk;
     stk.push(node); node = node->parent;
     int totalCost = node->pathCost;
-
+    int depth = node->depth;
     if (visualize) {
       do {
         stk.push(node);
@@ -35,7 +35,7 @@ void SearchP(Problem2048::State *grid, int M, Search::GeneralSearch *strategy, b
       }
       std::cout << ((Problem2048::State*)node->state)->visualize();
     }
-    cout << "Total Path Cost = " << totalCost << std::endl;
+    cout << "Depth = " << depth << ", " << "Total Path Cost = " << totalCost << std::endl;
   }
 }
 
