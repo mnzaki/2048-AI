@@ -39,17 +39,23 @@ void SearchP(Problem2048::State *grid, int M, Search::GeneralSearch *strategy, b
   }
 }
 
-int main(){
+int main(int argc, char *argv[]){
   int m, visualize;
   Search::GeneralSearch *strategy;
   string sstrategy;
 
-  cout << "Enter m(the required power of 2 goal): ";
-  cin >> m;
-  cout << "Enter the strategy(BF, DF, ID , GRi, ASi): ";
-  cin >> sstrategy;
-  cout << "Enter 1 if you need to visualize the result, 0 insted: ";
-  cin >> visualize;
+  if (argc < 3) {
+    cout << "Enter m(the required power of 2 goal): ";
+    cin >> m;
+    cout << "Enter the strategy(BF, DF, ID , GRi, ASi): ";
+    cin >> sstrategy;
+    cout << "Enter 1 if you need to visualize the result, 0 insted: ";
+    cin >> visualize;
+  } else {
+    sscanf(argv[1], "%d", &m);
+    sstrategy = argv[2];
+    sscanf(argv[3], "%d", &visualize);
+  }
 
   if(sstrategy.substr(0,2) == "BF") strategy = new Search::BF();
   else if(sstrategy.substr(0,2) == "DF") strategy = new  Search::DF();
