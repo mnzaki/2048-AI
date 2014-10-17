@@ -20,6 +20,7 @@ namespace Search {
 
   class SearchNode {
   public:
+    static unsigned obj_count;
     State *state;
     SearchNode *parent;
     Operator *op;
@@ -29,8 +30,8 @@ namespace Search {
     SearchNode(State *_state, SearchNode *_parent, Operator *_op,
               unsigned long _depth, long _pathCost) :
       state(_state), parent(_parent), op(_op),
-      depth(_depth), pathCost(_pathCost) { };
-    ~SearchNode() { delete state; }
+      depth(_depth), pathCost(_pathCost) { obj_count++; };
+    ~SearchNode() { delete state; obj_count--; }
   };
 
   class Problem {
