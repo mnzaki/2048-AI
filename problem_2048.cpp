@@ -129,17 +129,6 @@ Search::State* Problem2048::Operator::apply(Search::State *s) {
     };
   }
 
-  // place a new 2**1
-  if (newState->board[0][0] == 0) {
-    newState->board[0][0] = 1;
-  } else if (newState->board[0][3] == 0) {
-    newState->board[0][3] = 1;
-  } else if (newState->board[3][3] == 0) {
-      newState->board[3][3] = 1;
-  } else if (newState->board[3][0] == 0) {
-      newState->board[3][0] = 1;
-  }
-
   for(x = 0; x < 4; x++)  {
     for(y = 0; y < 4; y++)  {
       if (newState->board[y][x] != state->board[y][x]) break;
@@ -154,6 +143,18 @@ Search::State* Problem2048::Operator::apply(Search::State *s) {
 #endif
     return NULL;
   }
+
+  // place a new 2**1
+  if (newState->board[0][0] == 0) {
+    newState->board[0][0] = 1;
+  } else if (newState->board[0][3] == 0) {
+    newState->board[0][3] = 1;
+  } else if (newState->board[3][3] == 0) {
+      newState->board[3][3] = 1;
+  } else if (newState->board[3][0] == 0) {
+      newState->board[3][0] = 1;
+  }
+
 
 #if DEBUG
   std::cout << "FROM: \n" << state->visualize() << "TO: \n" << newState->visualize() << "\n\n";
