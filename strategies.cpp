@@ -1,5 +1,6 @@
 #include <cstring>
 #include <deque>
+#include <iostream>
 #include "strategies.hpp"
 
 namespace Search {
@@ -23,10 +24,12 @@ namespace Search {
     while(fvalues.size()>Q.size()) fvalues.pop_front();
     int fnode = f(node);
     std::deque<int>::iterator it = lower_bound(fvalues.begin(), fvalues.begin(), fnode);
-    fvalues.insert(it, fnode);
     std::deque<SearchNode*>::iterator it2 = Q.begin();
-    std::advance(it2, it-fvalues.begin());
+    std::advance(it2, (int)(it-fvalues.begin()));
+    fvalues.insert(it, fnode);
     Q.insert(it2, node);
+
+    std::cout << "f: " << fnode << "\n";
   }
 
 };
