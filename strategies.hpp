@@ -2,6 +2,7 @@
 #define __STRATEGIES_HPP__
 
 #include "search.hpp"
+#include <deque>
 
 namespace Search {
   class BF : public GeneralSearch {
@@ -22,8 +23,10 @@ namespace Search {
     ID() : limit(5), maxLimit(20) { };
   };
   class BFS : public GeneralSearch {
+  public:
+    std::deque<int> fvalues;
+    virtual int f(SearchNode*) =0;
   private:
-    virtual int f(State*) =0;
     void enqueue(SearchNode*);
   };
 };

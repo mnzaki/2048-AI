@@ -20,12 +20,13 @@ namespace Search {
   }
 
   void BFS::enqueue(SearchNode *node){
-    int fnode = f(node->state);
-    for(std::deque<SearchNode*>::iterator it = Q.begin(); it != Q.end(); it++){
-      if(f((*it)->state) > fnode){
-        Q.insert(it, node);
-        break;
-      }
-    }
+    while(fvalues.size()>Q.size()) fvalues.pop_front();
+    int fnode = f(node);
+    std::deque<int>::iterator it = lower_bound(fvalues.begin(), fvalues.begin(), fnode);
+    fvalues.insert(it, fnode);
+    std::deque<SearchNode*>::iterator it2 = Q.begin();
+    std::advance(it2, it-fvalues.begin());
+    Q.insert(it2, node);
   }
+
 };

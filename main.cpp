@@ -60,10 +60,10 @@ int main(int argc, char *argv[]){
   if(sstrategy.substr(0,2) == "BF") strategy = new Search::BF();
   else if(sstrategy.substr(0,2) == "DF") strategy = new  Search::DF();
   else if(sstrategy.substr(0,2) == "ID") strategy = new Search::ID();
-  // else if(sstrategy.substr(0,3) == "GR1") strategy = new Search::GR1();
-  // else if(sstrategy.substr(0,3) == "GR2") strategy = new Search::GR2();
-  // else if(sstrategy.substr(0,3) == "AS1") strategy = new Search::AS1();
-  // else if(sstrategy.substr(0,3) == "AS2") strategy = new Search::AS2();
+  else if(sstrategy.substr(0,3) == "GR1") strategy = new Problem2048::GR1();
+  else if(sstrategy.substr(0,3) == "GR2") strategy = new Problem2048::GR2();
+  else if(sstrategy.substr(0,3) == "AS1") strategy = new Problem2048::AS1();
+  else if(sstrategy.substr(0,3) == "AS2") strategy = new Problem2048::AS2();
 
   SearchP(NULL, pow(2,m), strategy, visualize==1);
 
