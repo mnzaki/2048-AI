@@ -1,5 +1,6 @@
 #include <cstring>
 #include <deque>
+#include <iostream>
 #include "strategies.hpp"
 
 namespace Search {
@@ -22,13 +23,11 @@ namespace Search {
   void BFS::enqueue(SearchNode *node){
     while(fvalues.size()>Q.size()) fvalues.pop_front();
     int fnode = f(node);
-    std::deque<int>::iterator it_beg = fvalues.begin(),
-                              it_end = fvalues.end(),
-                              it     = lower_bound(it_beg, it_end, fnode);
+    std::deque<int>::iterator it = lower_bound(fvalues.begin(), fvalues.begin(), fnode);
     std::deque<SearchNode*>::iterator it2 = Q.begin();
-    std::advance(it2, (it-it_beg));
-    Q.insert(it2, node);
+    std::advance(it2, (int)(it-fvalues.begin()));
     fvalues.insert(it, fnode);
+    Q.insert(it2, node);
   }
 
 };
