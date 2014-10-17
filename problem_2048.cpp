@@ -6,6 +6,10 @@
 #include <iomanip>
 #include <string>
 #include <iostream>
+#include <queue>
+
+#define inboard(x,y) (x>=0 && y>=0 && x<4 && y<4)
+int dx[4]={0,0,1,-1}, dy[4]={1,-1,0,0};
 
 // State stores n, not 2^n
 Problem2048::State::State(bool empty) {
@@ -180,10 +184,29 @@ std::string Problem2048::Operator::print() {
 int Problem2048::GR1::f(Search::SearchNode *s){
   Problem2048::State *ps = (Problem2048::State*)s->state;
   int cost = 0;
+  int maxi=0 , x,y;
   for(int i=0; i<16; i++){
-    cost += pow(2,ps->board[i/4][i%4]) * ps->board[i/4][i%4];
+    x = i/4; y = i%4;
+    cost += pow(2,ps->board[x][y]) * ps->board[x][y];
+    if(ps->board[x][y]>ps->board[maxi/4][maxi%4]) maxi=i;
   }
-  return cost;
+  if(maxi==0 || maxi==3 || maxi==12 || maxi==15) cost+=10;
+
+  int xx,yy;
+  std::queue<int> q;
+  q.push(maxi);
+  while(!q.empty()){
+    maxi = q.front(); q.pop();
+    x = maxi/4; y = maxi%4;
+    for(int i=0; i<4; i++){
+      xx = x+dx[i]; yy = y+dy[i];
+      if(inboard(xx,yy) && ps->board[x][y]==ps->board[xx][yy]+1){
+        cost += ps->board[x][y];
+        q.push(xx*4+yy);
+      }
+    }
+  }
+  return -cost;
 }
 int Problem2048::GR2::f(Search::SearchNode *s){
   Problem2048::State *ps = (Problem2048::State*)s->state;
@@ -191,15 +214,34 @@ int Problem2048::GR2::f(Search::SearchNode *s){
   for(int i=0; i<16; i++){
     cost += pow(2,ps->board[i/4][i%4]) * ps->board[i/4][i%4];
   }
-  return cost;
+  return -cost;
 }
 int Problem2048::AS1::f(Search::SearchNode *s){
   Problem2048::State *ps = (Problem2048::State*)s->state;
-  int cost = s->pathCost; // TODO
+  int cost = s->pathCost-10*s->depth;
+  int maxi=0 , x,y;
   for(int i=0; i<16; i++){
-    cost += pow(2,ps->board[i/4][i%4]) * ps->board[i/4][i%4];
+    x = i/4; y = i%4;
+    cost += pow(2,ps->board[x][y]) * ps->board[x][y];
+    if(ps->board[x][y]>ps->board[maxi/4][maxi%4]) maxi=i;
   }
-  return cost;
+  if(maxi==0 || maxi==3 || maxi==12 || maxi==15) cost+=500;
+
+  int xx,yy;
+  std::queue<int> q;
+  q.push(maxi);
+  while(!q.empty()){
+    maxi = q.front(); q.pop();
+    x = maxi/4; y = maxi%4;
+    for(int i=0; i<4; i++){
+      xx = x+dx[i]; yy = y+dy[i];
+      if(inboard(xx,yy) && ps->board[x][y]==ps->board[xx][yy]+1){
+        cost += ps->board[x][y];
+        q.push(xx*4+yy);
+      }
+    }
+  }
+  return -cost;
 }
 int Problem2048::AS2::f(Search::SearchNode *s){
   Problem2048::State *ps = (Problem2048::State*)s->state;
@@ -207,5 +249,5 @@ int Problem2048::AS2::f(Search::SearchNode *s){
   for(int i=0; i<16; i++){
     cost += pow(2,ps->board[i/4][i%4]) * ps->board[i/4][i%4];
   }
-  return cost;
+  return -cost;
 }
