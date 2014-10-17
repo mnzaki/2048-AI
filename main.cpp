@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include <stack>
+#include <memory>
 
 using namespace Search;
 using namespace std;
@@ -13,21 +14,22 @@ Problem2048::State* GenGrid(){
 
 void SearchP(Problem2048::State *grid, int M, Search::GeneralSearch *strategy, bool visualize){
   Problem2048 problem(grid, (int)round(log(M)/log(2.0)));
-  SearchNode *node = strategy->search(&problem);
+  std::shared_ptr<SearchNode> node = strategy->search(&problem);
 
-  if (node == NULL) {
+  if (!node) {
     std::cout << "No solution found for:\n" << problem.initialState->visualize();
   } else {
-    stack<Search::SearchNode*> stk;
-    stk.push(node); node = node->parent;
+    stack<std::shared_ptr<Search::SearchNode> > stk;
     int totalCost = node->pathCost;
 
     if (visualize) {
-      do {
+      while (node->parent) {
         stk.push(node);
-        node = node->parent;
-      } while(node != NULL);
+        node.swap(node->parent);
+      }
     }
+    // always push at least 1 node (solution), or last node after visualize loop
+    stk.push(node);
     while (!stk.empty()){
       node = stk.top(); stk.pop();
       if (visualize && node->op) {
