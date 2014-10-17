@@ -13,33 +13,30 @@ Problem2048::State* GenGrid(){
 
 void SearchP(Problem2048::State *grid, int M, Search::GeneralSearch *strategy, bool visualize){
   Problem2048 problem(grid, (int)round(log(M)/log(2.0)));
-
   SearchNode *node = strategy->search(&problem);
 
-  int totalCost = node->pathCost;
-  stack<Search::SearchNode*> stk;
+  if (node == NULL) {
+    std::cout << "No solution found for:\n" << problem.initialState->visualize();
+  } else {
+    stack<Search::SearchNode*> stk;
+    stk.push(node); node = node->parent;
+    int totalCost = node->pathCost;
 
-  int x=0;
-  while(node->parent != NULL) {
-    stk.push(node);
-
-    node = node->parent;
-    if(x==10) break;
-    x++;
-  }
-
-  if (visualize) {
-    std::cout << ((Problem2048::State*)node->state)->visualize();
-  }
-  while(!stk.empty()){
-    node = stk.top(); stk.pop();
-    cout << "Move " << node->op->print() << std::endl;
     if (visualize) {
+      do {
+        stk.push(node);
+        node = node->parent;
+      } while(node != NULL);
+    }
+    while (!stk.empty()){
+      node = stk.top(); stk.pop();
+      if (visualize && node->op) {
+        cout << "Move " << node->op->print() << std::endl;
+      }
       std::cout << ((Problem2048::State*)node->state)->visualize();
     }
+    cout << "Total Path Cost = " << totalCost << std::endl;
   }
-
-  cout << "Total Path Cost = " << totalCost << std::endl;
 }
 
 int main(){
