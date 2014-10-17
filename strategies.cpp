@@ -2,15 +2,17 @@
 #include <deque>
 #include <iostream>
 #include "strategies.hpp"
+#include <iostream>
+#include <memory>
 
 namespace Search {
-  void BF::enqueue(SearchNode *node){
+  void BF::enqueue(std::shared_ptr<SearchNode> node){
     Q.push_back(node);
   }
-  void DF::enqueue(SearchNode *node){
+  void DF::enqueue(std::shared_ptr<SearchNode> node){
     Q.push_front(node);
   }
-  void ID::enqueue(SearchNode *node){
+  void ID::enqueue(std::shared_ptr<SearchNode> node){
     if (node->depth <= limit) {
       Q.push_front(node);
     } else if (Q.empty() && limit < maxLimit) {
@@ -20,11 +22,11 @@ namespace Search {
     }
   }
 
-  void BFS::enqueue(SearchNode *node){
+  void BFS::enqueue(std::shared_ptr<SearchNode> node){
     while(fvalues.size()>Q.size()) fvalues.pop_front();
-    int fnode = f(node);
+    int fnode = f(node.get());
     std::deque<int>::iterator it = lower_bound(fvalues.begin(), fvalues.end(), fnode);
-    std::deque<SearchNode*>::iterator it2 = Q.begin();
+    std::deque<std::shared_ptr<SearchNode> >::iterator it2 = Q.begin();
     std::advance(it2, (int)(it-fvalues.begin()));
     fvalues.insert(it, fnode);
     Q.insert(it2, node);

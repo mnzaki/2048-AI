@@ -3,20 +3,21 @@
 
 #include "search.hpp"
 #include <deque>
+#include <memory>
 
 namespace Search {
   class BF : public GeneralSearch {
   private:
-    void enqueue(SearchNode*);
+    void enqueue(std::shared_ptr<SearchNode>);
   };
   class DF : public GeneralSearch {
   private:
-    void enqueue(SearchNode*);
+    void enqueue(std::shared_ptr<SearchNode>);
   };
   class ID : public GeneralSearch {
   private:
     unsigned limit, maxLimit;
-    void enqueue(SearchNode*);
+    void enqueue(std::shared_ptr<SearchNode>);
   public:
     ID(unsigned _limit, unsigned _maxLimit)
       : limit(_limit), maxLimit(_maxLimit) { };
@@ -27,7 +28,7 @@ namespace Search {
     std::deque<int> fvalues;
     virtual int f(SearchNode*) =0;
   private:
-    void enqueue(SearchNode*);
+    void enqueue(std::shared_ptr<SearchNode>);
   };
 };
 

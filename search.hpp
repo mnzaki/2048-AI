@@ -5,6 +5,7 @@
 #include <string>
 #include <deque>
 #include <string>
+#include <memory>
 
 namespace Search {
   class State {
@@ -22,12 +23,16 @@ namespace Search {
   public:
     static unsigned obj_count;
     State *state;
-    SearchNode *parent;
+    std::shared_ptr<SearchNode> parent;
     Operator *op;
     unsigned long depth;
     long pathCost;
 
-    SearchNode(State *_state, SearchNode *_parent, Operator *_op,
+    /*SearchNode(State *_state, SearchNode *_parent, Operator *_op,
+              unsigned long _depth, long _pathCost) :
+      state(_state), parent(_parent), op(_op),
+      depth(_depth), pathCost(_pathCost) { };*/
+    SearchNode(State *_state, std::shared_ptr<SearchNode> _parent, Operator *_op,
               unsigned long _depth, long _pathCost) :
       state(_state), parent(_parent), op(_op),
       depth(_depth), pathCost(_pathCost) { obj_count++; };
@@ -45,10 +50,10 @@ namespace Search {
 
   class GeneralSearch {
   protected:
-    std::deque<SearchNode*> Q;
-    virtual void enqueue(SearchNode*) =0;
+    std::deque<std::shared_ptr<SearchNode> > Q;
+    virtual void enqueue(std::shared_ptr<SearchNode>) =0;
   public:
-    SearchNode* search(Problem*);
+    std::shared_ptr<SearchNode> search(Problem*);
   };
 };
 
